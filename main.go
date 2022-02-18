@@ -1,7 +1,7 @@
 package main
 
 import (
-	"bookapi/app"
+	"github.com/armuh16/book_user-api/app"
 )
 
 func main() {
