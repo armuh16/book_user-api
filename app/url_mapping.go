@@ -1,9 +1,9 @@
 package app
 
 import (
-	"github.com/armuh16/book_user-api/controller"
+	"bookapi/controllers"
 )
 
 func mapUrls() {
-	router.GET(relativePath: "/ping", controllers.Ping)
+	router.GET("/ping", controllers.Ping)
 }

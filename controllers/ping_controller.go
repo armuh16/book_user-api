@@ -1,4 +1,4 @@
-package contollers
+package controllers
 
 import (
 	"net/http"
@@ -7,22 +7,22 @@ import (
 )
 
 func Ping(c *gin.Context) {
-	c.String(http.StatusOK, format: "pong")
+	c.String(http.StatusOK, "pong")
 }
 
 const (
 	pong = "pong"
 )
 
+type pingController struct{}
+
 var (
 	PingController pingControllerInterface = &pingController{}
 )
 
 type pingControllerInterface interface {
-	ping(w http.ResponseWriter, r *http.Request)
+	Ping(w http.ResponseWriter, r *http.Request)
 }
-
-type pingController struct{}
 
 func (c *pingController) Ping(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
