@@ -1,7 +1,7 @@
 package app
 
 import (
-	"github.com/armuh16/book_user-api/controllers"
+	"github.com/armuh16/book_user-api/controller"
 )
 
 func mapUrls() {
