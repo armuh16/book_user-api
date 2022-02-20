@@ -22,3 +22,4 @@ func SearchUser(c *gin.Context) {
 	c.String(http.StatusNotImplemented, "implement me")
 }
 
+
