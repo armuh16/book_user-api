@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	"github.com/armuh16/book_user-api/domain/users"
+	"github.com/armuh16/book_user-api/services"
 	"github.com/gin-gonic/gin"
 )
 
@@ -27,13 +28,14 @@ func CreateUser(c *gin.Context) {
 		// TODO: Handler json error
 		return
 	}
-	// result, saveErr := service.CreateUser(user)
-	// if saveErr != nil {
-	// 	//TODO : hadle user creating error
-	// 	return
-	// }
+	result, saveErr := services.CreateUser(user)
+	if saveErr != nil {
+		//TODO : Hadle user creating error
+		return
+	}
+
 	fmt.Println(user)
-	c.String(http.StatusNotImplemented, "implement me")
+	c.JSON(http.StatusCreated, result)
 }
 
 func GetUser(c *gin.Context) {
