@@ -1,6 +1,7 @@
 package users
 
 import (
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -21,8 +22,17 @@ func CreateUser(c *gin.Context) {
 		// TODO: Handle Error
 		return
 	}
-	fmt.Println(string(bytes))
-	fmt.Println(err)
+	if err := json.Unmarshal(bytes, &user); err != nil {
+		fmt.Println(err.Error())
+		// TODO: Handler json error
+		return
+	}
+	// result, saveErr := service.CreateUser(user)
+	// if saveErr != nil {
+	// 	//TODO : hadle user creating error
+	// 	return
+	// }
+	fmt.Println(user)
 	c.String(http.StatusNotImplemented, "implement me")
 }
 
