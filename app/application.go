@@ -1,12 +1,12 @@
 package app
 
-import "github.com/gin-gonic/gin"
+// import "github.com/gin-gonic/gin"
 
-var (
-	router = gin.Default()
-)
+// var (
+// 	router = gin.Default()
+// )
 
-func StartApplication() {
-	mapUrls()
-	router.Run(":8081") //address
-}
+// func StartApplication() {
+// 	mapUrls()
+// 	router.Run(":8081") //address
+// }
