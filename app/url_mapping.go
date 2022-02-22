@@ -1,6 +1,6 @@
 package app
 
-// import (
+import (
 // 	"github.com/armuh16/book_user-api/controllers/ping_controller"
 // )
 
