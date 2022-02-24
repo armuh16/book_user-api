@@ -15,7 +15,6 @@ var (
 
 func CreateUser(c *gin.Context) {
 	var user users.User
-	fmt.Print("Hallo world")
 	// bytes, err := ioutil.ReadAll(c.Request.Body)
 	// if err != nil {
 	// 	// TODO: Handle Error
@@ -27,8 +26,9 @@ func CreateUser(c *gin.Context) {
 	// 	return
 	// }
 	if err := c.ShouldBindJSON(&user); err != nil {
-		//TODO: Handle error
+		//TODO: Handle json error
 		fmt.Println(err)
+		//TODO: Return bad request to the caller
 		return
 	}
 	fmt.Println(user)
@@ -37,7 +37,6 @@ func CreateUser(c *gin.Context) {
 		//TODO : Hadle user creating error
 		return
 	}
-
 	fmt.Println(user)
 	c.JSON(http.StatusCreated, result)
 }
