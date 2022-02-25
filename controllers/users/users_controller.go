@@ -34,7 +34,7 @@ func CreateUser(c *gin.Context) {
 			Error:   "bad request",
 		}
 		fmt.Println(err)
-		c.JSON(http.StatusBadRequest, restErr)
+		c.JSON(restErr.Status, restErr)
 		//TODO: Return bad request to the caller
 		return
 	}
