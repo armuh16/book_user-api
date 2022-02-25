@@ -6,6 +6,7 @@ import (
 
 	"github.com/armuh16/book_user-api/domain/users"
 	"github.com/armuh16/book_user-api/services"
+	"github.com/armuh16/book_user-api/utils/errors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -27,7 +28,13 @@ func CreateUser(c *gin.Context) {
 	// }
 	if err := c.ShouldBindJSON(&user); err != nil {
 		//TODO: Handle json error
+		restErr := errors.RestErr{
+			Message: "invalid json body",
+			Status:  http.StatusBadRequest,
+			Error:   "bad request",
+		}
 		fmt.Println(err)
+		c.JSON(http.StatusBadRequest, restErr)
 		//TODO: Return bad request to the caller
 		return
 	}
