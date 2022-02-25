@@ -41,6 +41,7 @@ func CreateUser(c *gin.Context) {
 	fmt.Println(user)
 	result, saveErr := services.CreateUser(user)
 	if saveErr != nil {
+		c.JSON(saveErr.Status, saveErr)
 		//TODO : Hadle user creating error
 		return
 	}
