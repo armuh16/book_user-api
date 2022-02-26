@@ -1,7 +1,6 @@
 package users
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/armuh16/book_user-api/domain/users"
@@ -28,24 +27,17 @@ func CreateUser(c *gin.Context) {
 	// }
 	if err := c.ShouldBindJSON(&user); err != nil {
 		//TODO: Handle json error
-		restErr := errors.RestErr{
-			Message: "invalid json body",
-			Status:  http.StatusBadRequest,
-			Error:   "bad request",
-		}
-		fmt.Println(err)
+		restErr := errors.NewBadRequestError("invalid json body") // message
 		c.JSON(restErr.Status, restErr)
 		//TODO: Return bad request to the caller
 		return
 	}
-	fmt.Println(user)
 	result, saveErr := services.CreateUser(user)
 	if saveErr != nil {
 		c.JSON(saveErr.Status, saveErr)
 		//TODO : Hadle user creating error
 		return
 	}
-	fmt.Println(user)
 	c.JSON(http.StatusCreated, result)
 }
 
