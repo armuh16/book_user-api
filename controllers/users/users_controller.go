@@ -17,26 +17,21 @@ func CreateUser(c *gin.Context) {
 	var user users.User
 	// bytes, err := ioutil.ReadAll(c.Request.Body)
 	// if err != nil {
-	// 	// TODO: Handle Error
-	// 	return
+	// 	return // TODO: Handle Error
 	// }
 	// if err := json.Unmarshal(bytes, &user); err != nil {
 	// 	fmt.Println(err.Error())
-	// 	// TODO: Handler json error
-	// 	return
+	// return // TODO: Handler json error
 	// }
 	if err := c.ShouldBindJSON(&user); err != nil {
-		//TODO: Handle json error
-		restErr := errors.NewBadRequestError("invalid json body") // message
+		restErr := errors.NewBadRequestError("invalid json body") // message //TODO: Handle json error
 		c.JSON(restErr.Status, restErr)
-		//TODO: Return bad request to the caller
-		return
+		return //TODO: Return bad request to the caller
 	}
 	result, saveErr := services.CreateUser(user)
 	if saveErr != nil {
 		c.JSON(saveErr.Status, saveErr)
-		//TODO : Hadle user creating error
-		return
+		return //TODO : Hadle user creating error
 	}
 	c.JSON(http.StatusCreated, result)
 }
