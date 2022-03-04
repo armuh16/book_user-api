@@ -21,3 +21,11 @@ func Validate(user *User) *errors.RestErr {
 	}
 	return nil
 }
+
+func (user *User) Validate() *errors.RestErr {
+	user.Email = strings.TrimSpace(strings.ToLower(user.Email))
+	if user.Email == "" {
+		return errors.NewBadRequestError("invalid email address")
+	}
+	return nil
+}
