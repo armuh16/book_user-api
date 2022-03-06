@@ -4,6 +4,8 @@ import (
 	"github.com/armuh16/book_user-api/utils/errors"
 )
 
+// connect to db
+
 var (
 	userDB = make(map[int64]*User)
 )
@@ -32,9 +34,14 @@ func (user *User) Get() *errors.RestErr {
 	return nil
 }
 
-func (user User) Save() *errors.RestErr {
-	if userDB[user.Id] != nil {
+func (user *User) Save() *errors.RestErr {
+	current := userDB[user.Id]
+	if current != nil {
+		if current.Email == user.Email {
+			return errors.NewBadRequestError("email already registered")
+		}
 		return errors.NewBadRequestError("user already exist")
 	}
+	userDB[user.Id] = user
 	return nil
 }
