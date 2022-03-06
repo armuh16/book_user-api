@@ -1,8 +1,6 @@
 package users
 
 import (
-	"fmt"
-
 	"github.com/armuh16/book_user-api/utils/errors"
 )
 
@@ -10,19 +8,20 @@ var (
 	userDB = make(map[int64]*User)
 )
 
-func something() {
-	user := User{}
+// func something() {
+// 	user := User{}
 
-	if err := user.Get(); err != nil {
-		fmt.Println(err)
-		return
-	}
-}
+// 	if err := user.Get(); err != nil {
+// 		fmt.Println(err)
+// 		return
+// 	}
+// 	fmt.Println(user.FirstName)
+// }
 
-func (user User) Get() *errors.RestErr {
+func (user *User) Get() *errors.RestErr {
 	result := userDB[user.Id]
 	if result == nil {
-		return errors.NewNotFoundError(fmt.Printf("user %d not found", user.Id))
+		return errors.NewNotFoundError("user id not found")
 	}
 
 	user.Id = result.Id
@@ -34,5 +33,8 @@ func (user User) Get() *errors.RestErr {
 }
 
 func (user User) Save() *errors.RestErr {
+	if userDB[user.Id] != nil {
+		return errors.NewBadRequestError("user already exist")
+	}
 	return nil
 }
