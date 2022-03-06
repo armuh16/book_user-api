@@ -6,10 +6,13 @@ import (
 )
 
 func CreateUser(user users.User) (*users.User, *errors.RestErr) {
-	if err := users.Validate(&user); err != nil {
+	if err := user.Validate(); err != nil {
 		return nil, err
 	}
-	return nil, nil
+	if err := user.Save(); err != nil {
+		return nil, err
+	}
+	return &user, nil
 	// return &user, &errors.RestErr{
 	// 	Status: http.StatusInternalServerError,
 	// }
