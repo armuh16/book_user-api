@@ -38,13 +38,18 @@ func CreateUser(c *gin.Context) {
 }
 
 func GetUser(c *gin.Context) {
-	userId, userErr := strconv.ParseInt(c.Param("user id"), 10, 64)
+	userId, userErr := strconv.ParseInt(c.Param("user id"), 10, 64) // base 10, bitSize 64
 	if userErr != nil {
 		err := errors.NewBadRequestError("invalid user id")
 		c.JSON(err.Status, err)
 		return
 	}
-	c.String(http.StatusNotImplemented, "implement me")
+	user, getErr := services.GetUser(userId)
+	if getErr != nil {
+		c.JSON(getErr.Status, getErr)
+		return //TODO : Hadle user creating error
+	}
+	c.JSON(http.StatusOK, user)
 }
 
 func SearchUser(c *gin.Context) {
